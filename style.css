@@ -15,20 +15,22 @@ body {
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
+    position: relative;
+    text-align: center;
 }
 
 
 .houdini-wrapper {
     position: relative;
-    z-index: 2;
+    z-index: 0;
     display: flex;
     align-self: stretch;
     align-items: stretch;
     width: 100%;
     height: auto;
     min-height: inherit;
-    transition-property: transform;
     box-sizing: content-box;
+    transition-property: transform;
 }
    
 .houdini-slide {
@@ -56,5 +58,28 @@ body {
     margin-right: auto;
     padding: 0 50px;
 }
+
+.houdini-prev, .houdini-next {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 30px;
+    line-height: 1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.houdini-prev {
+    left: 20px;
+}
+
+.houdini-next {
+    right: 20px;
+}
+
 
 * { box-sizing: border-box };
