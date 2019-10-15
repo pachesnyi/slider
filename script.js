@@ -16,15 +16,14 @@
     this._next = this._element.querySelector(".houdini-next");
     this._prev = this._element.querySelector(".houdini-prev");
 
-    _self = this;
 
     this.defineSlideWidth();
     this.changeSlide();
   
 
     window.addEventListener("resize", ()=> {
-      this.defineSlideWidth(); 
-      this.changeSlide();  
+      this.defineSlideWidth();
+      this.changeSlide();
     });
 
     if (!this._slides) {
@@ -38,20 +37,23 @@
     }
 
     if (this._next) {
-      this._next.addEventListener("click", () => {
-        this._currentSlide += 1;
-        if(this._currentSlide > this._slides.length - 1 ) return;
-        this._slidewidth = this._currentSlide * this._slideWidth;
-        this.changeSlide();
+      this._next.addEventListener("click", () => {    
+        if(!(this._currentSlide > this._slides.length - 2)) {
+          this._currentSlide += 1;
+          this._slidewidth = this._currentSlide * this._slideWidth;
+          this.changeSlide();
+        }
+   
       });
     }
 
     if (this._prev) {
-      this._prev.addEventListener("click", () => {
-        this._currentSlide -= 1;
-        if(this._currentSlide < 0 ) return;
-        this._slidewidth = this._currentSlide * this._slideWidth;
-        this.changeSlide();
+      this._prev.addEventListener("click", () => {     
+        if(!(this._currentSlide < 0) ) {
+          this._currentSlide -= 1;
+          this._slidewidth = this._currentSlide * this._slideWidth;
+          this.changeSlide();
+        }  
       });
     }
   }
@@ -66,12 +68,14 @@
     el.style.cssText = `background-image: url('images/${value}'); background-size: cover;`;
   };
 
+  
+
   MySlider.prototype.defineSlideWidth = function() {
     this._slideWidth = this._slide.offsetWidth;
   };
 
   MySlider.prototype.changeSlide = function() {
-    this._wrapper.style.cssText = `transition-duration: 1000ms; transform:translate3d(-${this._slidewidth}px, 0, 0)`;
+    this._wrapper.style.transform = `translate3d(-${this._slidewidth}px, 0, 0)`;
   };
 
   document.addEventListener("DOMContentLoaded", function() {
